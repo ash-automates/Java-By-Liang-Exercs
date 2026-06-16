@@ -8,11 +8,18 @@ public class Course {
     }
 
     public void addStudent(String student) {
+        if (numberOfStudents == students.length) {
+            String[] students = new String[this.students.length * 2];
+            System.arraycopy(this.students, 0, students, 0, this.students.length);
+            this.students = students;
+        }
         students[numberOfStudents] = student;
         numberOfStudents++;
     }
 
     public String[] getStudents() {
+        String[] students = new String[this.students.length];
+        System.arraycopy(this.students, 0, students, 0, this.students.length);
         return students;
     }
 
@@ -25,6 +32,14 @@ public class Course {
     }
 
     public void dropStudent(String student) {
-        // Left as an exercise in Exercise 10.9
+        for (int i = 0; i < this.students.length; i++) {
+            if (student.equals(this.students[i])) {
+                for (int j = i; j < this.students.length - 1; j++) {
+                    this.students[j] = this.students[j + 1];
+                }
+                this.numberOfStudents = this.numberOfStudents + 1;
+                break;
+            }
+        }
     }
 }
