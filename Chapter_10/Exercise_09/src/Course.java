@@ -18,8 +18,8 @@ public class Course {
     }
 
     public String[] getStudents() {
-        String[] students = new String[this.students.length];
-        System.arraycopy(this.students, 0, students, 0, this.students.length);
+        String[] students = new String[this.getNumberOfStudents()];
+        System.arraycopy(this.students, 0, students, 0, this.getNumberOfStudents());
         return students;
     }
 
@@ -32,14 +32,19 @@ public class Course {
     }
 
     public void dropStudent(String student) {
-        for (int i = 0; i < this.students.length; i++) {
+        for (int i = 0; i < this.getNumberOfStudents(); i++) {
             if (student.equals(this.students[i])) {
-                for (int j = i; j < this.students.length - 1; j++) {
+                for (int j = i; j < this.getNumberOfStudents() - 1; j++) {
                     this.students[j] = this.students[j + 1];
                 }
-                this.numberOfStudents = this.numberOfStudents + 1;
+                this.numberOfStudents = this.numberOfStudents - 1;
                 break;
             }
         }
+    }
+
+    public void clear() {
+        this.students = new String[this.students.length];
+        this.numberOfStudents = 0;
     }
 }
